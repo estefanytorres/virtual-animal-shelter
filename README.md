@@ -1,8 +1,10 @@
-# Google Software Product Sprint
+Group Project
 
-This repo contains the projects you'll work on throughout SPS.
+Roles by Week
 
-To get started:
+Week 5: Data Storage on Google Cloud 
+
+Week 6: TBD
 
 - Login to [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell/editor)
 - Clone this repo: `cd; git clone https://github.com/google/software-product-sprint.git`
