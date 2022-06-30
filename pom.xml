@@ -16,7 +16,7 @@
 
     <!-- Project-specific properties -->
     <exec.mainClass>com.google.sps.ServerMain</exec.mainClass>
-    <googleCloudProjectId>ruiwu-animal</googleCloudProjectId>
+    <googleCloudProjectId>summer22-sps-24</googleCloudProjectId>
   </properties>
 
   <dependencies>
