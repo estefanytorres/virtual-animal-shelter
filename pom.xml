@@ -16,7 +16,7 @@
 
     <!-- Project-specific properties -->
     <exec.mainClass>com.google.sps.ServerMain</exec.mainClass>
-    <googleCloudProjectId>YOUR_PROJECT_ID_HERE</googleCloudProjectId>
+    <googleCloudProjectId>sps-virtual-animal-shelter</googleCloudProjectId>
   </properties>
 
   <dependencies>
@@ -48,9 +48,16 @@
 
     <!-- JSoup -->
     <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>1.14.2</version>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>1.14.2</version>
+    </dependency>
+
+    <!-- Google Cloud Storage -->
+    <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-storage</artifactId>
+        <version>1.113.0</version>
     </dependency>
     
   </dependencies>
