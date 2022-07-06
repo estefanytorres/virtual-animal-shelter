@@ -36,7 +36,12 @@ public class NewPostServlet extends HttpServlet {
         String location = request.getParameter("location");
         String animalType = request.getParameter("animalType");
         String breed = request.getParameter("breed");
+
         String dob = request.getParameter("birthday"); 
+        LocalDate.parse(dob, formatter.withResolverStyle(ResolverStyle.STRICT)); //checks both formatting and validness of dates
+        birthDate.isAfter(LocalDate.now().minusYears(80)); 
+        // checks that the birthday is within the last 80 years
+        // considering many different species for pets, 80 years seem more than enough. (parrots live up to ~70 years old apparently)
 
         String gender = request.getParameter("gender");
         if (!genderSet.contains(gender)) {
@@ -48,11 +53,13 @@ public class NewPostServlet extends HttpServlet {
         String sickness = request.getParameter("sickness");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+
         String status = request.getParameter("status");
         if (!statusSet.contains(status)) {
             //if the status from request is not a valid status, we error.
             //as with the question above, what action to take here? 
         }
+
         long timePosted = System.currentTimeMillis();
 
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
