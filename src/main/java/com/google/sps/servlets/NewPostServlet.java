@@ -50,7 +50,7 @@ public class NewPostServlet extends HttpServlet {
         KeyFactory keyFactory = datastore.newKeyFactory().setKind("Post");
         FullEntity postEntity =
             Entity.newBuilder(keyFactory.newKey())
-            .set("photo", imageURL)
+            .set("photoURL", imageURL)
             .build();
         datastore.put(postEntity);
 
