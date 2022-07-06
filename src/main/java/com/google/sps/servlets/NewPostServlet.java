@@ -1,5 +1,6 @@
 package com.google.sps.servlets;
 
+import java.util.*;
 import com.google.sps.data.Post;
 import com.google.sps.data.Post.Gender;
 import com.google.sps.data.Post.Status;
@@ -16,10 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
+import org.apache.commons.lang3.EnumUtils;
 
 @WebServlet("/new-post") // open to changes in what it's called! 
 public class NewPostServlet extends HttpServlet {
-    
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // would sanitisation be necessary here?
@@ -27,18 +29,30 @@ public class NewPostServlet extends HttpServlet {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        String petName = request.getParameter("pet_name");
+        Set<String> statusSet = EnumUtils.getEnumMap(Status.class).keySet(); // set of options in Status enum
+        Set<String> genderSet = EnumUtils.getEnumMap(Gender.class).keySet(); // set of options in Gender enum
+
+        String petName = request.getParameter("petName");
         String location = request.getParameter("location");
-        String animalType = request.getParameter("animal_type");
+        String animalType = request.getParameter("animalType");
         String breed = request.getParameter("breed");
         String dob = request.getParameter("birthday"); 
-        //LocalDate dob = LocalDate.parse(request.getParameter("birthday"), formatter);
-        String gender = request.getParameter("gender");//Gender.valueOf(request.getParameter("gender"));
+
+        String gender = request.getParameter("gender");
+        if (!genderSet.contains(gender)) {
+            //if the gender from request is not a valid gender, we error. 
+            //What kind of an error should we throw? Or what action should we take?
+        }
+
         String vaccination = request.getParameter("vacinnation");
         String sickness = request.getParameter("sickness");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String status = request.getParameter("status"); //Status.valueOf(request.getParameter("status"));
+        String status = request.getParameter("status");
+        if (!statusSet.contains(status)) {
+            //if the status from request is not a valid status, we error.
+            //as with the question above, what action to take here? 
+        }
         long timePosted = System.currentTimeMillis();
 
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
