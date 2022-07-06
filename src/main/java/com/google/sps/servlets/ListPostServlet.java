@@ -54,9 +54,17 @@ public class ListPostServlet extends HttpServlet {
             long tp = entity.getLong("timePosted");
             ZonedDateTime z = ZonedDateTime.ofInstant(Instant.ofEpochMilli(tp), ZoneId.systemDefault());
             ZonedDateTime timePosted = z.withZoneSameInstant(ZoneId.of("UTC"));
+            String photoURL = entity.getString("photoURL");
     
-            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted);
+            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted, photoURL);
             posts.add(post);
+
+            // output the photoURL as an <img> element in HMTL
+            response.setContentType("text/html;");
+            String imgTag = String.format("<img src=\"%s\" />", photoURL);
+            response.getWriter().println(imgTag);
+            response.getWriter().println("<br>");
+            //also need to check for a case where there's no image uploaded (don't we want to make images mandatory though?)
         }
 
         Gson gson = new Gson();
