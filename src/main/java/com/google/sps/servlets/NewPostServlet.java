@@ -47,6 +47,7 @@ public class NewPostServlet extends HttpServlet {
         if (!genderSet.contains(gender)) {
             //if the gender from request is not a valid gender, we error. 
             //What kind of an error should we throw? Or what action should we take?
+            continue;
         }
 
         String vaccination = request.getParameter("vacinnation");
@@ -58,6 +59,7 @@ public class NewPostServlet extends HttpServlet {
         if (!statusSet.contains(status)) {
             //if the status from request is not a valid status, we error.
             //as with the question above, what action to take here? 
+            continue;
         }
 
         long timePosted = System.currentTimeMillis();
@@ -66,9 +68,9 @@ public class NewPostServlet extends HttpServlet {
         KeyFactory keyFactory = datastore.newKeyFactory().setKind("Post");
         FullEntity postEntity =
             Entity.newBuilder(keyFactory.newKey())
-                .set("pet name", petName)
+                .set("petName", petName)
                 .set("location", location)
-                .set("animal type", animalType)
+                .set("animalType", animalType)
                 .set("breed", breed)
                 .set("birthday", dob)
                 .set("gender", gender) // would this work with radios?
@@ -76,7 +78,7 @@ public class NewPostServlet extends HttpServlet {
                 .set("sickness", sickness)
                 .set("email", email)
                 .set("phone", phone)
-                .set("time-posted", timePosted)
+                .set("timePosted", timePosted)
                 .set("status", status)
                 .build();
         datastore.put(postEntity);
