@@ -6,6 +6,7 @@ import com.google.sps.data.Post.Gender;
 import com.google.sps.data.Post.Status;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
@@ -27,8 +28,6 @@ public class NewPostServlet extends HttpServlet {
         // would sanitisation be necessary here?
         // the names inside the getParameter should match with html element attributes 
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         Set<String> statusSet = EnumUtils.getEnumMap(Status.class).keySet(); // set of options in Status enum
         Set<String> genderSet = EnumUtils.getEnumMap(Gender.class).keySet(); // set of options in Gender enum
 
@@ -37,9 +36,10 @@ public class NewPostServlet extends HttpServlet {
         String animalType = request.getParameter("animalType");
         String breed = request.getParameter("breed");
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dob = request.getParameter("birthday"); 
         LocalDate.parse(dob, formatter.withResolverStyle(ResolverStyle.STRICT)); //checks both formatting and validness of dates
-        birthDate.isAfter(LocalDate.now().minusYears(80)); 
+        LocalDate.parse(dob, formatter).isAfter(LocalDate.now().minusYears(80)); 
         // checks that the birthday is within the last 80 years
         // considering many different species for pets, 80 years seem more than enough. (parrots live up to ~70 years old apparently)
 
@@ -47,7 +47,6 @@ public class NewPostServlet extends HttpServlet {
         if (!genderSet.contains(gender)) {
             //if the gender from request is not a valid gender, we error. 
             //What kind of an error should we throw? Or what action should we take?
-            continue;
         }
 
         String vaccination = request.getParameter("vacinnation");
@@ -59,7 +58,6 @@ public class NewPostServlet extends HttpServlet {
         if (!statusSet.contains(status)) {
             //if the status from request is not a valid status, we error.
             //as with the question above, what action to take here? 
-            continue;
         }
 
         long timePosted = System.currentTimeMillis();
