@@ -24,23 +24,24 @@ import javax.servlet.http.HttpServletResponse;
 public class ListPostServlet extends HttpServlet {
     
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
         Query<Entity> query =
             Query.newEntityQueryBuilder().setKind("Post").setOrderBy(OrderBy.desc("time-posted")).build();
         QueryResults<Entity> results = datastore.run(query);
     
         List<Post> posts = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         while (results.hasNext()) {
             Entity entity = results.next();
     
             long id = entity.getKey().getId();
-            String petName = entity.getString("pet name");
+            String petName = entity.getString("petName");
             String location = entity.getString("location");
-            String animalType = entity.getString("animal type");
+            String animalType = entity.getString("animalType");
             String breed = entity.getString("breed");
             String birthday = entity.getString("birthday");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dob = LocalDate.parse(birthday, formatter);
             String gen = entity.getString("gender");
             Gender gender = Gender.valueOf(gen);
@@ -49,15 +50,18 @@ public class ListPostServlet extends HttpServlet {
             String email = entity.getString("email");
             String phone = entity.getString("phone");
             String stat = entity.getString("status");
-            Status status = Status.valueOf(stat);
-            long tp = entity.getLong("time-posted");
+            //Status status = Status.valueOf(stat);
+            long tp = entity.getLong("timePosted");
             ZonedDateTime z = ZonedDateTime.ofInstant(Instant.ofEpochMilli(tp), ZoneId.systemDefault());
             ZonedDateTime timePosted = z.withZoneSameInstant(ZoneId.of("UTC"));
     
-          Post post = new Post(...);
-          posts.add(post);
+            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted);
+            posts.add(post);
         }
 
-        ... 
+        Gson gson = new Gson();
+
+        response.setContentType("application/json;");
+        response.getWriter().println(gson.toJson(posts));
       }
 }
