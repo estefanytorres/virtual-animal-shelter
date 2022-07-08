@@ -7,3 +7,16 @@
 #greeting-container {
   margin-top: 20px;
 }
+.imgbox {
+    display: grid;
+    height: 100%;
+}
+.center-fit {
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+}
+.title-style{
+    font-family:Fantasy;
+    text-align:center;
+}

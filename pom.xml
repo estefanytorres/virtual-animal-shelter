@@ -16,7 +16,7 @@
 
     <!-- Project-specific properties -->
     <exec.mainClass>com.google.sps.ServerMain</exec.mainClass>
-    <googleCloudProjectId>sps-virtual-animal-shelter</googleCloudProjectId>
+    <googleCloudProjectId>summer22-sps-24.uc.r</googleCloudProjectId>
   </properties>
 
   <dependencies>

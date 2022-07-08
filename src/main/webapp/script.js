@@ -26,3 +26,43 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+/** Fetches all sumbitted posts from the server and list them to the DOM. **/
+function loadPosts() {
+    // "/list-posts" is a servlet fetch all posts from the server;
+    // Class Name for each post is Post
+    // Each new Post named as post;
+    // The List<Post> is named as posts;
+    fetch('/list-posts').then(response => response.json()).then((posts) => {
+    const postListElement = document.getElementById('post-container');
+    posts.forEach((post) => {
+        postListElement.appendChild(createPostElement(post));
+      })
+    });
+}
+
+/** Creates an element that represents a post, including its delete button. */
+function createPostElement(post) {
+    const postElement = document.createElement('li');
+    postElement.className = 'post';
+    
+    const titleElement = document.createElement('span');
+    titleElement.innerText = post.textValue;
+    
+    // create a button to delete an elemnet
+    const deleteButtonElement = document.createElement('button');
+    deleteButtonElement.innerText = 'Delete';
+    deleteButtonElement.addEventListener('click', () => {
+        delete post;
+    // Remove an element from the DOM.
+    postElement.remove();
+    });
+    
+    postElement.appendChild(titleElement);
+    postElement.appendChild(deleteButtonElement);
+    return postElement;
+}
+
+
+
+

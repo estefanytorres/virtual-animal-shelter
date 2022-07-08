@@ -65,6 +65,7 @@ public class ListPostServlet extends HttpServlet {
             response.getWriter().println(imgTag);
             response.getWriter().println("<br>");
             //also need to check for a case where there's no image uploaded (don't we want to make images mandatory though?)
+
         }
 
         Gson gson = new Gson();
