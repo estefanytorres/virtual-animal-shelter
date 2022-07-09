@@ -7,18 +7,27 @@
     <script src="script.js"></script>
   </head>
   <body>
+    <div class = "title-style">
+        <h1>Animal Shelter</h1>
+        <p>A HOME FOR ANIMALS</p>
+    </div>
     <div class="imgbox">
         <img class="center-fit" src='1/adoptapet.jpeg'>
     </div>
-    <div class = "title-style">
-        <h1>Animal Shelter</h1>
-    </div>
-    <div id="content">
-      <p>This is a platform for animal lover.</p>
-      <p>Click <a href="/hello">here</a> to post a request.</p>
-      <p>A home for animals.</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <div class="container">
+        <br>
+        <div class="left">
+            <form action="/newPost.html">
+                <img class="center-fit" src='1/2.jpeg'>
+                <p align="center">Click <button>POST</button> to post for an adoption.</p>
+            </form>
+        </div>
+        <div class="right">
+            <form action="/listPosts.html">
+                <img class="center-fit" src='1/3.jpeg'>
+                <p align="center">Click <button>REVIEW</button> to review all the post for adoption.</p>
+            </form>
+        </div>
     </div>
   </body>
 </html>
