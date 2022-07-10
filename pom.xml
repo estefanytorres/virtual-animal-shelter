@@ -16,7 +16,7 @@
 
     <!-- Project-specific properties -->
     <exec.mainClass>com.google.sps.ServerMain</exec.mainClass>
-    <googleCloudProjectId>summer22-sps-24.uc.r</googleCloudProjectId>
+    <googleCloudProjectId>summer22-sps-24</googleCloudProjectId>
   </properties>
 
   <dependencies>
@@ -58,6 +58,13 @@
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-storage</artifactId>
         <version>1.113.0</version>
+    </dependency>
+
+    <!-- Apache Commons Lang 3-->
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.11</version>
     </dependency>
     
   </dependencies>

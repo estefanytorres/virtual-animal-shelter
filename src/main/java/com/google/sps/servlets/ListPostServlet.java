@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/load-post")
 public class ListPostServlet extends HttpServlet {
     
     @Override
@@ -49,14 +50,27 @@ public class ListPostServlet extends HttpServlet {
             String sickness = entity.getString("sickness");
             String email = entity.getString("email");
             String phone = entity.getString("phone");
-            String stat = entity.getString("status");
+            //String stat = entity.getString("status");
             //Status status = Status.valueOf(stat);
             long tp = entity.getLong("timePosted");
             ZonedDateTime z = ZonedDateTime.ofInstant(Instant.ofEpochMilli(tp), ZoneId.systemDefault());
             ZonedDateTime timePosted = z.withZoneSameInstant(ZoneId.of("UTC"));
+            String photoURL = ""; //entity.getString("photoURL");
     
-            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted);
+            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted, photoURL);
             posts.add(post);
+
+            response.getWriter().println(photoURL);
+            response.getWriter().println(timePosted);
+            response.getWriter().println(phone);
+            response.getWriter().println(petName);
+            // output the photoURL as an <img> element in HMTL
+            // response.setContentType("text/html;");
+            // String imgTag = String.format("<img src=\"%s\" />", photoURL);
+            // response.getWriter().println(imgTag);
+            // response.getWriter().println("<br>");
+            //also need to check for a case where there's no image uploaded (don't we want to make images mandatory though?)
+
         }
 
         Gson gson = new Gson();
@@ -65,3 +79,4 @@ public class ListPostServlet extends HttpServlet {
         response.getWriter().println(gson.toJson(posts));
       }
 }
+
