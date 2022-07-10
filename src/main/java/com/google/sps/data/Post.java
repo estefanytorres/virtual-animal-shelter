@@ -1,4 +1,4 @@
-package data;
+package com.google.sps.data;
 import java.time.*;
 /*
 if you want to use the Gender and Status enums in other files, do these:
@@ -25,7 +25,8 @@ public class Post {
     private String location;
     private String animalType;
     private String breed;
-    private String dob; 
+    private LocalDate dob; 
+    // change the timePosted's type to "long" to match NewPostServlet.java
     private long timePosted; //We want to unify the times to be in UTC. We can use ZonedDateTime to set zone id to UTC, which is handled in the ListPostServlet.java
     private Gender gender;
     private String vaccination;
@@ -35,7 +36,7 @@ public class Post {
     private Status status;
 
     public Post(long id, String petName, String location, String animalType, String breed, 
-                String dob, Gender gen, String vac, String sick, String email, String phone, long tp) {
+                LocalDate dob, Gender gen, String vac, String sick, String email, String phone, long tp) {
         this.id = id;
         this.petName = petName;
         this.location = location;

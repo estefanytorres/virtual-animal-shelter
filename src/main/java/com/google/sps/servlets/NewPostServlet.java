@@ -17,11 +17,10 @@ import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.KeyFactory;
+import com.google.sps.data.Post.Gender;
+import com.google.sps.data.Post.Status;
 
 import org.apache.commons.lang3.EnumUtils;
-
-import data.Post.Gender;
-import data.Post.Status;
 
 @WebServlet("/new-post") // open to changes in what it's called! 
 public class NewPostServlet extends HttpServlet {
