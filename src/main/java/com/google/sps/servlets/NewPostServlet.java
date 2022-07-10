@@ -1,27 +1,24 @@
 package com.google.sps.servlets;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import java.util.*;
+import com.google.sps.data.Post;
+import com.google.sps.data.Post.Gender;
+import com.google.sps.data.Post.Status;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.util.Set;
-import java.util.function.DoubleConsumer;
-
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.KeyFactory;
-
+import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.jsoup.Jsoup;
 import org.apache.commons.lang3.EnumUtils;
-
-import data.Post.Gender;
-import data.Post.Status;
 
 @WebServlet("/new-post") // open to changes in what it's called! 
 public class NewPostServlet extends HttpServlet {
@@ -30,6 +27,9 @@ public class NewPostServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // would sanitisation be necessary here?
         // the names inside the getParameter should match with html element attributes 
+
+        // delete status'setting since it has been initiated in the class constructor
+        // Set<String> statusSet = EnumUtils.getEnumMap(Status.class).keySet(); // set of options in Status enum
         Set<String> genderSet = EnumUtils.getEnumMap(Gender.class).keySet(); // set of options in Gender enum
 
         String petName = request.getParameter("petName");
@@ -39,7 +39,7 @@ public class NewPostServlet extends HttpServlet {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dob = request.getParameter("dob"); 
-        // This line cause dob format error
+        // This line cause ERROR 500 java.time.format.DateTimeParseException
         // LocalDate.parse(dob, formatter.withResolverStyle(ResolverStyle.STRICT)); //checks both formatting and validness of dates
         LocalDate.parse(dob, formatter).isAfter(LocalDate.now().minusYears(80)); 
         // checks that the birthday is within the last 80 years
@@ -55,6 +55,14 @@ public class NewPostServlet extends HttpServlet {
         String sickness = request.getParameter("sickness");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+
+        /*
+        String status = request.getParameter("status");
+        if (!statusSet.contains(status)) {
+            //if the status from request is not a valid status, we error.
+            //as with the question above, what action to take here? 
+        }
+        */
 
         long timePosted = System.currentTimeMillis();
 
@@ -73,11 +81,9 @@ public class NewPostServlet extends HttpServlet {
                 .set("email", email)
                 .set("phone", phone)
                 .set("timePosted", timePosted)
+                //.set("status", status)
                 .build();
         datastore.put(postEntity);
-
-    // Write the value to the response so the user can see it.
-    response.getWriter().println("Your Post has been submitted!");
 
     }
 }
