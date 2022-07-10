@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <body>
 
 <h1>Pet's Information</h1>
 
-<form action="/action_page.php">
+<form action="/new-post" method="POST" enctype="multipart/form-data"> <!-- what is action="/action_page.php" ?-->
   <label for="petName">Pet name:</label>
   <input type="text" id="petName" name="petName"><br><br>
   <label for="location">Location:</label>
@@ -14,7 +15,7 @@
   <label for="breed">Breed:</label>
   <input type="text" id="breed" name="breed"><br><br>
   <label for="dob">Birthday:</label>
-  <input type="datetime-local" id="dob" name="dob"><br><br>
+  <input type="date" id="dob" name="birthday"><br><br>
   <label for="gender">Gender:</label>
     <select name="gender" id="gender">
     <option value="UNSPECIFIED">Unspecified</option>
@@ -26,13 +27,13 @@
   <label for="sickness">Sickness:</label>
   <input type="text" id="sickness" name="sickness"><br><br>
   <label for="emails">Email addresses(separate each email address with a comma):</label>
-  <input type="email" id="emails" name="emails" multiple> <br><br>
+  <input type="email" id="emails" name="email" multiple> <br><br>
   <label for="phone">Phone number:</label>
   <input type="tel" id="phone" name="phone" placeholder="+001-123-456-7890" pattern="+[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br><br>
-  <label for="images">Choose images to upload (Must be *.jpg or *.jpeg or *.png)</label>
-  <input type="file" id="images" name="images" multiple
-          accept=".jpg, .jpeg, .png"><br><br>
-  <input type="submit">
+  <!-- <label for="images">Choose images to upload (Must be *.jpg or *.jpeg or *.png)</label> -->
+  <!-- <input type="file" id="images" name="image" multiple
+          accept=".jpg, .jpeg, .png"><br><br> -->
+  <input type="submit"> 
 </form>
 
 <p>Click the "Submit" button to complete your post.</p>
