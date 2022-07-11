@@ -42,12 +42,12 @@ public class NewPostServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the img file chosen by the user
-        // Part image = request.getPart("image");
-        // String imgFileName = image.getSubmittedFileName(); 
-        // InputStream imgInputStream = image.getInputStream();
+        Part image = request.getPart("image");
+        String imgFileName = image.getSubmittedFileName(); 
+        InputStream imgInputStream = image.getInputStream();
 
         // // Upload the file to cloud storage
-        // String imageURL = cloudStorageUpload(imgFileName, imgInputStream);
+        String imageURL = cloudStorageUpload(imgFileName, imgInputStream);
 
         // Get all options from Status and Gender enums as sets
         Set<String> genderSet = EnumUtils.getEnumMap(Gender.class).keySet(); // set of options in Gender enum
@@ -98,7 +98,7 @@ public class NewPostServlet extends HttpServlet {
                 .set("phone", phone)
                 .set("timePosted", timePosted)
                 //.set("status", status)
-                //.set("photoURL", imageURL)
+                .set("photoURL", imageURL)
                 .build();
         datastore.put(postEntity);
 
@@ -111,8 +111,8 @@ public class NewPostServlet extends HttpServlet {
     */
     private static String cloudStorageUpload(String fileName, InputStream fileInputStream) {
         //should edit once project id actually decided
-        String projectId = "summer22-sps-24";
-        String bucketName = "summer22-sps-24.appspot.com";
+        String projectId = "jhong-sps-summer22";
+        String bucketName = "jhong-sps-summer22.appspot.com";
 
         Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
