@@ -12,31 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
 /** Fetches all sumbitted posts from the server and list them to the DOM. **/
 function loadPosts() {
-    // "/list-posts" is a servlet fetch all posts from the server;
+    // "/load-post" is a servlet fetch all posts from the server;
     // Class Name for each post is Post
     // Each new Post named as post;
     // The List<Post> is named as posts;
-    fetch('/load-post').then(response => response.json()).then((posts) => {
-    const postListElement = document.getElementById('post-container');
-    posts.forEach((post) => {
-        postListElement.appendChild(createPostElement(post));
+    fetch("/load-post").then(response => response.json()).then((posts) => {
+        const postListElement = document.getElementById('post-container');
+        posts.forEach((post) => {
+            postListElement.appendChild(createPostElement(post));
       })
     });
 }
@@ -47,7 +32,7 @@ function createPostElement(post) {
     postElement.className = 'post';
     
     const titleElement = document.createElement('span');
-    titleElement.innerText = post.textValue;
+    titleElement.innerText = post.petName;
     
     // create a button to delete an elemnet
     const deleteButtonElement = document.createElement('button');
@@ -62,6 +47,10 @@ function createPostElement(post) {
     postElement.appendChild(deleteButtonElement);
     return postElement;
 }
+
+function redirect(){
+    window.location = "/load-post"
+    }
 
 
 

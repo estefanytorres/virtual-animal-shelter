@@ -11,7 +11,8 @@ public class Post {
 
     public enum Gender {
         MALE,
-        FEMALE
+        FEMALE,
+        UNSPECIFIED
     }
     
     public enum Status {
@@ -35,7 +36,7 @@ public class Post {
     private String photoURL;
 
     public Post(long id, String petName, String location, String animalType, String breed, 
-                LocalDate dob, Gender gen, String vac, String sick, String email, String phone, ZonedDateTime tp, String photoURL) {
+                LocalDate dob, Gender gen, String vac, String sick, String email, String phone, ZonedDateTime tp) {
         this.id = id;
         this.petName = petName;
         this.location = location;
@@ -49,7 +50,7 @@ public class Post {
         this.phone = phone;
         this.status = Status.OPEN;
         this.timePosted = tp;
-        this.photoURL = photoURL;
+        //this.photoURL = photoURL;
     }
 
     public void setStatus(Status s) {
