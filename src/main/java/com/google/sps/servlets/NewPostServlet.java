@@ -43,7 +43,7 @@ public class NewPostServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the img file chosen by the user
         Part image = request.getPart("image");
-        String imgFileName = image.getSubmittedFileName(); 
+        String imgFileName = UUID.randomUUID().toString(); //image.getSubmittedFileName(); 
         InputStream imgInputStream = image.getInputStream();
 
         // // Upload the file to cloud storage
