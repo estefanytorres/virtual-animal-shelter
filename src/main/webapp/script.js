@@ -18,6 +18,7 @@ function loadPosts() {
     // Class Name for each post is Post
     // Each new Post named as post;
     // The List<Post> is named as posts;
+
     fetch("/load-post").then(response => response.json()).then((posts) => {
         const postListElement = document.getElementById('post-container');
         posts.forEach((post) => {
@@ -31,26 +32,43 @@ function createPostElement(post) {
     const postElement = document.createElement('li');
     postElement.className = 'post';
     
-    const titleElement = document.createElement('span');
-    titleElement.innerText = post.petName;
-    
-    // create a button to delete an elemnet
-    const deleteButtonElement = document.createElement('button');
-    deleteButtonElement.innerText = 'Delete';
-    deleteButtonElement.addEventListener('click', () => {
-        delete post;
-    // Remove an element from the DOM.
-    postElement.remove();
-    });
-    
-    postElement.appendChild(titleElement);
-    postElement.appendChild(deleteButtonElement);
+    const nameElement = document.createElement('strong');
+    nameElement.innerText = "Pet Name: " + post.petName;
+
+    const typeElement = document.createElement('div');
+    typeElement.innerText = "Animal Type: " + post.animalType;
+
+    const locElement = document.createElement('div');
+    locElement.innerText = "Location: " + post.location;
+
+    const ageElement = document.createElement('div');
+    var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+    ageElement.innerText = "Age: "+ getAge(dob) + " years old";
+
+    postElement.appendChild(nameElement);
+    postElement.appendChild(typeElement);
+    postElement.appendChild(locElement);
+    postElement.appendChild(ageElement);
+
     return postElement;
 }
 
-function redirect(){
-    window.location = "/load-post"
+/** Caculate the age based on birthday. (minus for unborn baby)*/
+function getAge(dateString) 
+{
+    var today = new Date(); //returns date object of current date and time
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m_diff = today.getMonth() - birthDate.getMonth();
+    if (m_diff < 0) 
+    {
+        age--;
     }
+    
+    return age;
+}
+
+
 
 
 
