@@ -12,6 +12,7 @@ import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
 import com.google.gson.Gson;
+import com.google.sps.data.Post;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ListPostServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
         Query<Entity> query =
-            Query.newEntityQueryBuilder().setKind("Post").setOrderBy(OrderBy.desc("timePosted")).build();
+            Query.newEntityQueryBuilder().setKind("Post").setOrderBy(OrderBy.desc("time-posted")).build();
         QueryResults<Entity> results = datastore.run(query);
     
         List<Post> posts = new ArrayList<>();
@@ -54,19 +55,15 @@ public class ListPostServlet extends HttpServlet {
             long tp = entity.getLong("timePosted");
             ZonedDateTime z = ZonedDateTime.ofInstant(Instant.ofEpochMilli(tp), ZoneId.systemDefault());
             ZonedDateTime timePosted = z.withZoneSameInstant(ZoneId.of("UTC"));
-            //String photoURL = ""; //entity.getString("photoURL");
+            String photoURL = ""; //entity.getString("photoURL");
     
-            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted);
+            Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted, photoURL);
             posts.add(post);
 
-            //response.getWriter().println(photoURL);
-
-            response.getWriter().println("Pet's Name: "+ petName+"<br/>");
-            response.getWriter().println("Pet's General information: a. Birthday: "+dob+"  b.Location: "+ location+ "  c. Type: " + animalType + "  d. Breed: " + breed +"  e. Gender: " + gender+"<br/>");
-            response.getWriter().println("Pet's Healthcare: a. Vaccination: "+ vaccination+" b.Sickness: "+sickness+"<br/>");
-            response.getWriter().println("Contact: a.Phone Number: "+phone+" b.Email: "+email+"<br/>");
-            response.getWriter().println("   "+"<br/>");
-        
+            response.getWriter().println(photoURL);
+            response.getWriter().println(timePosted);
+            response.getWriter().println(phone);
+            response.getWriter().println(petName);
             // output the photoURL as an <img> element in HMTL
             // response.setContentType("text/html;");
             // String imgTag = String.format("<img src=\"%s\" />", photoURL);
@@ -76,10 +73,10 @@ public class ListPostServlet extends HttpServlet {
 
         }
 
-        //Gson gson = new Gson();
-        //response.setContentType("application/json;");
-        //response.getWriter().println(gson.toJson(posts));
+        Gson gson = new Gson();
 
+        response.setContentType("application/json;");
+        response.getWriter().println(gson.toJson(posts));
       }
 }
 
