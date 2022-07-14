@@ -36,6 +36,7 @@ function loadPosts() {
     fetch('/load-post').then(response => response.json()).then((posts) => {
     const postListElement = document.getElementById('post-container');
     posts.forEach((post) => {
+        console.log(post);
         postListElement.appendChild(createPostElement(post));
       })
     });
