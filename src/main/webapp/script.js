@@ -43,7 +43,7 @@ function createPostElement(post) {
 
     const ageElement = document.createElement('div');
     var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
-    ageElement.innerText = "Age: "+ getAge(dob) + " years old";
+    ageElement.innerText = "Age: "+ getAge(dob);
 
     postElement.appendChild(nameElement);
     postElement.appendChild(typeElement);
@@ -53,19 +53,27 @@ function createPostElement(post) {
     return postElement;
 }
 
-/** Caculate the age based on birthday. (minus for unborn baby)*/
-function getAge(dateString) 
+/** Caculate the age based on birthday. */
+function getAge(birthDate) 
 {
+    let result;
     var today = new Date(); //returns date object of current date and time
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
+    var y_diff = today.getFullYear() - birthDate.getFullYear();
     var m_diff = today.getMonth() - birthDate.getMonth();
+
     if (m_diff < 0) 
     {
-        age--;
+        y_diff--;
+        m_diff = 12 + m_diff;
+    }
+   
+    if (y_diff < 0) {
+        result = "Unborn Baby"
+    } else {
+        result = y_diff.toString() + " years " + m_diff.toString() + " months old";
     }
     
-    return age;
+    return result;
 }
 
 
