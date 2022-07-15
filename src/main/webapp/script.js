@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** Fetches all sumbitted posts from the server and list them to the DOM. **/
+/*
+/** Fetches all sumbitted posts from the server and list them to the DOM. 
 function loadPosts() {
     // "/load-post" is a servlet fetch all posts from the server;
     // Class Name for each post is Post
@@ -26,8 +27,9 @@ function loadPosts() {
       })
     });
 }
+**/
 
-/** Creates an element that represents a post, including its delete button. */
+/** Creates an element that represents a post, including its delete button. 
 function createPostElement(post) {
     const postElement = document.createElement('li');
     postElement.className = 'post';
@@ -52,6 +54,8 @@ function createPostElement(post) {
 
     return postElement;
 }
+*/
+
 
 /** Caculate the age based on birthday. */
 function getAge(birthDate) 
@@ -75,6 +79,40 @@ function getAge(birthDate)
 
     return result;
 }
+
+/** Fetches all sumbitted posts from the server with search function based animalType and location. **/
+function loadPosts() {
+    const userCardTemplate = document.querySelector("[data-user-template]");
+    const userCardContainer = document.querySelector("[data-user-cards-container]");
+    const searchInput = document.querySelector("[data-search]");
+
+    let lists = [];
+
+    searchInput.addEventListener("input", (e)=> {
+        const value = e.target.value.toLowerCase();
+        lists.forEach(post => {
+            const isVisible = post.animalType.toLowerCase().includes(value) || post.location.toLowerCase().includes(value)
+            post.element.classList.toggle("hide", !isVisible)
+        })
+    })
+    fetch("/load-post").then(response => response.json()).then(posts => {
+        lists = posts.map(post => {
+            const card = userCardTemplate.content.cloneNode(true).children[0];
+            const header = card.querySelector("[data-header]")
+            const location = card.querySelector("[data-location]")
+            const type = card.querySelector("[data-type]")
+            const age = card.querySelector("[data-age]")
+            header.textContent = post.petName;
+            location.textContent = post.location;
+            type.textContent = post.animalType;
+            var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+            age.textContent = getAge(dob);
+            userCardContainer.append(card);
+            return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
+      })
+    });
+}
+
 
 
 
