@@ -12,57 +12,110 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
-/** Fetches all sumbitted posts from the server and list them to the DOM. **/
+/*
+/** Fetches all sumbitted posts from the server and list them to the DOM. 
 function loadPosts() {
-    // "/list-posts" is a servlet fetch all posts from the server;
+    // "/load-post" is a servlet fetch all posts from the server;
     // Class Name for each post is Post
     // Each new Post named as post;
     // The List<Post> is named as posts;
-    fetch('/load-post').then(response => response.json()).then((posts) => {
-    const postListElement = document.getElementById('post-container');
-    posts.forEach((post) => {
-        console.log(post);
-        postListElement.appendChild(createPostElement(post));
+    fetch("/load-post").then(response => response.json()).then((posts) => {
+        const postListElement = document.getElementById('post-container');
+        posts.forEach((post) => {
+            postListElement.appendChild(createPostElement(post));
+
       })
     });
 }
+**/
 
-/** Creates an element that represents a post, including its delete button. */
+/** Creates an element that represents a post, including its delete button. 
 function createPostElement(post) {
     const postElement = document.createElement('li');
     postElement.className = 'post';
     
-    const titleElement = document.createElement('span');
-    titleElement.innerText = post.textValue;
-    
-    // create a button to delete an elemnet
-    const deleteButtonElement = document.createElement('button');
-    deleteButtonElement.innerText = 'Delete';
-    deleteButtonElement.addEventListener('click', () => {
-        delete post;
-    // Remove an element from the DOM.
-    postElement.remove();
-    });
-    
-    postElement.appendChild(titleElement);
-    postElement.appendChild(deleteButtonElement);
+    const nameElement = document.createElement('strong');
+    nameElement.innerText = "Pet Name: " + post.petName;
+
+    const typeElement = document.createElement('div');
+    typeElement.innerText = "Animal Type: " + post.animalType;
+
+    const locElement = document.createElement('div');
+    locElement.innerText = "Location: " + post.location;
+
+    const ageElement = document.createElement('div');
+    var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+    ageElement.innerText = "Age: "+ getAge(dob);
+
+    postElement.appendChild(nameElement);
+    postElement.appendChild(typeElement);
+    postElement.appendChild(locElement);
+    postElement.appendChild(ageElement);
+
     return postElement;
 }
+*/
+
+
+/** Caculate the age based on birthday. */
+function getAge(birthDate) 
+{
+    let result;
+    var today = new Date(); //returns date object of current date and time
+    var y_diff = today.getFullYear() - birthDate.getFullYear();
+    var m_diff = today.getMonth() - birthDate.getMonth();
+
+    if (m_diff < 0) 
+    {
+        y_diff--;
+        m_diff = 12 + m_diff;
+    }
+
+    if (y_diff < 0) {
+        result = "Unborn Baby"
+    } else {
+        result = y_diff.toString() + " years " + m_diff.toString() + " months old";
+    }
+
+    return result;
+}
+
+/** Fetches all sumbitted posts from the server with search function based animalType and location. **/
+function loadPosts() {
+    const userCardTemplate = document.querySelector("[data-user-template]");
+    const userCardContainer = document.querySelector("[data-user-cards-container]");
+    const searchInput = document.querySelector("[data-search]");
+
+    let lists = [];
+
+    searchInput.addEventListener("input", (e)=> {
+        const value = e.target.value.toLowerCase();
+        lists.forEach(post => {
+            const isVisible = post.animalType.toLowerCase().includes(value) || post.location.toLowerCase().includes(value)
+            post.element.classList.toggle("hide", !isVisible)
+        })
+    })
+    fetch("/load-post").then(response => response.json()).then(posts => {
+        lists = posts.map(post => {
+            const card = userCardTemplate.content.cloneNode(true).children[0];
+            const header = card.querySelector("[data-header]")
+            const location = card.querySelector("[data-location]")
+            const type = card.querySelector("[data-type]")
+            const age = card.querySelector("[data-age]")
+            header.textContent = post.petName;
+            location.textContent = post.location;
+            type.textContent = post.animalType;
+            var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+            age.textContent = getAge(dob);
+            userCardContainer.append(card);
+            return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
+      })
+    });
+}
+
+
+
+
 
 
 
