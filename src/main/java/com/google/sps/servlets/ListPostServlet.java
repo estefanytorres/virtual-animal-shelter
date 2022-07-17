@@ -55,7 +55,7 @@ public class ListPostServlet extends HttpServlet {
             long tp = entity.getLong("timePosted");
             ZonedDateTime z = ZonedDateTime.ofInstant(Instant.ofEpochMilli(tp), ZoneId.systemDefault());
             ZonedDateTime timePosted = z.withZoneSameInstant(ZoneId.of("UTC"));
-            String photoURL = ""; //entity.getString("photoURL");
+            String photoURL = entity.getString("photoURL");
     
             Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted, photoURL);
             posts.add(post);
