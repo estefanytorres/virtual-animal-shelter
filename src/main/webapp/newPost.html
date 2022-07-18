@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="newPost.css">
 <body>
-
 <h1>Pet's Information</h1>
+
 
 <form action="/new-post" method="POST" enctype="multipart/form-data"> <!-- what is action="/action_page.php" ?-->
   <label for="petName">Pet name:</label>
@@ -17,26 +17,23 @@
   <label for="dob">Birthday:</label>
   <input type="date" id="dob" name="birthday"><br><br>
   <label for="gender">Gender:</label>
-    <select name="gender" id="gender">
-    <option value="UNSPECIFIED">Unspecified</option>
-    <option value="FEMALE">Female</option>
-    <option value="MALE">Male</option>
+    <select name="gender" id="gender" style="padding:10px; border:0;box-shadow:0 0 15px 4px rgba(0,0,0,0.06);border-radius:10px;font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
+    <option value="UNSPECIFIED" style="font-size: 18px; font-family: Verdana, Geneva, Tahoma, sans-serif;">Unspecified</option>
+    <option value="FEMALE" style="font-size: 18px;font-family: Verdana, Geneva, Tahoma, sans-serif;">Female</option>
+    <option value="MALE" style="font-size: 18px; font-family: Verdana, Geneva, Tahoma, sans-serif;">Male</option>
     </select><br><br>
   <label for="vacinnation">Vacinnation:</label>
   <input type="text" id="vacinnation" name="vacinnation"><br><br>
   <label for="sickness">Sickness:</label>
   <input type="text" id="sickness" name="sickness"><br><br>
-  <label for="emails">Email addresses(separate each email address with a comma):</label>
+  <label for="emails">Email addresses:</label>
   <input type="email" id="emails" name="email" multiple> <br><br>
   <label for="phone">Phone number:</label>
   <input type="tel" id="phone" name="phone" placeholder="+001-123-456-7890" pattern="+[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br><br>
   <label for="images">Choose images to upload (Must be *.jpg or *.jpeg or *.png)</label> -->
   <input type="file" id="images" name="image" multiple
           accept=".jpg, .jpeg, .png"><br><br> 
-  <input type="submit"> 
+  <input type="submit" style="background-color: pink;"> 
 </form>
-
-<p>Click the "Submit" button to complete your post.</p>
-
 </body>
 </html>
