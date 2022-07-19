@@ -19,11 +19,11 @@ function loadPosts() {
     // Class Name for each post is Post
     // Each new Post named as post;
     // The List<Post> is named as posts;
-
     fetch("/load-post").then(response => response.json()).then((posts) => {
         const postListElement = document.getElementById('post-container');
         posts.forEach((post) => {
             postListElement.appendChild(createPostElement(post));
+
       })
     });
 }
