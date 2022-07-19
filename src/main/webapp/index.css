@@ -1,0 +1,68 @@
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+  background-color: white;
+  border: none;
+  color: rgb(232, 23, 121);
+    padding: 2.5px 25px;
+    text-align: center;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold; 
+    margin-left: 460px;
+}
+input {
+    width:1250px;
+    padding:15px;
+    border-color:rgb(232, 23, 121);
+    border-radius:15px;
+    font-size: 18px;  
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+    background-image: url(images/background-picture.png);
+    background-position: 0px 65px;
+    background-repeat: no-repeat;
+  }
+
+h1 {
+    font-size: 110px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold; 
+    margin-left: 180px; 
+}
+
+.portrait {
+    height: 80px;
+    width: 30px;
+}
+
+
+
+.cards {
+    margin: 0 auto;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
+    font-family: sans-serif;
+    padding-top: 30px;
+}
+
+.card {
+    box-sizing: border-box;
+}
+
+.card__image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    border-top: 2px solid #333333;
+    border-right: 2px solid #333333;
+    border-left: 2px solid #333333;
+}

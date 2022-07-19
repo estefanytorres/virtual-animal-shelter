@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Animal shelter</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
     <script src="script.js"></script>
-  </head>
+    <div class="row">
+    <img src="images/cat.png"> 
+    <a href="/newPost.html" class="button"> Add Post</a>
+    </div>
+  
   <body>
-    <div class = "title-style">
+    
         <h1>Animal Shelter</h1>
-        <p>A HOME FOR ANIMALS</p>
-    </div>
-    <div class="imgbox">
-        <img class="center-fit" src='1/adoptapet.jpeg'>
-    </div>
-    <div class="container">
-        <br>
-        <div class="left">
-            <form action="/newPost.html">
-                <img class="center-fit" src='1/2.jpeg'>
-                <p align="center">Click <button>POST</button> to post for an adoption.</p>
-            </form>
+        <p style="font-size: 70px;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold; 
+        margin-left: 190px; ">A HOME FOR ANIMALS</p>
+    
+    <body onload = "loadPosts()">
+        <div class = "input">
+            <input type="search" id = "search" data-search placeholder="Search:Keywords of Location or Animal Type" style="margin-top:80px; ">
         </div>
-        <div class="right">
-            <form action="/listPosts.html">
-                <img class="center-fit" src='1/3.jpeg'>
-                <p align="center">Click <button>REVIEW</button> to review all the post for adoption.</p>
-            </form>
+        <div class="cards" data-user-cards-container>
         </div>
-    </div>
-
-    <a href="newPost.html"><button>New Post</button></a>
-    <a href="listPosts.html"><button>See All Posts</button></a>
+        
+      <template data-user-template>
+        <div class="cards">
+          <div class="card">
+          <img src="1/cat-default.jpg" class="card-img" alt="...">
+          <div class="header" data-header>
+              </div>
+          <div class ="location" data-location>
+              </div>
+          <div class ="type" data-type>
+              </div>
+          <div class ="age" data-age>
+              </div>
+            </div>
+        </div>
+      </template>
+  
+    </body>
 
   </body>
 </html>
+
