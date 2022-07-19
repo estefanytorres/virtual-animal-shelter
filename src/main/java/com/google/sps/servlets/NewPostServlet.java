@@ -101,8 +101,9 @@ public class NewPostServlet extends HttpServlet {
                 .set("photoURL", imageURL)
                 .build();
         datastore.put(postEntity);
-
         response.getWriter().println("Posted and Stored Successfully!");
+        response.setHeader("REFRESH", "4; URL=/index.html");
+        
     }
 
     /*
@@ -111,8 +112,8 @@ public class NewPostServlet extends HttpServlet {
     */
     private static String cloudStorageUpload(String fileName, InputStream fileInputStream) {
         //should edit once project id actually decided
-        String projectId = "summer22-sps-24";
-        String bucketName = "summer22-sps-24.appspot.com";
+        String projectId = "gloria-group";
+        String bucketName = "gloria-group.appspot.com";
 
         Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
