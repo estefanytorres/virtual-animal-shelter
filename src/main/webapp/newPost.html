@@ -2,14 +2,16 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<script src="//maps.googleapis.com/maps/api/js"></script> geocoder
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk&libraries=places&callback=validateLocation"></script> <!-- google maps autocomplete -->
+<!-- Our google maps platform api key: AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk-->
 <h1>Pet's Information</h1>
 
 <form action="/new-post" method="POST" enctype="multipart/form-data"> <!-- what is action="/action_page.php" ?-->
   <label for="petName">Pet name:</label>
   <input type="text" id="petName" name="petName"><br><br>
-  <label for="location">Location:</label>
-  <input type="text" id="location" name="location"><br><br>
+  <label for="location">Address:</label>
+  <input type="text" id="location" name="location" onchange="validateLocation()" placeholder="address need not be precise"><br><br>
   <label for="animalType">Animal Type:</label>
   <input type="text" id="animalType" name="animalType"><br><br>
   <label for="breed">Breed:</label>

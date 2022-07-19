@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Animal shelter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet"> 
+    <!-- <script>
+    var config = {
+        apiKey: "AIzaSyAbEVEhhUgDvvtkbu3a-EHPkYee32bz-_c",
+        authDomain: "summer22-sps-24.firebaseapp.com",
+    };
+    firebase.initializeApp(config);
+    </script> -->
+  </head>
+  <body>
+    <button id="logout" onclick="signout()">Log Out</button>
+    <div class = "title-style">
+        <h1>Animal Shelter</h1>
+        <p>A HOME FOR ANIMALS</p>
+    </div>
+    <!-- <script type="text/javascript">
+        let email = "test@test.com";
+        let password = "password";
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((authCredential) => {
+                console.log(`user Id: ${authCredential.user.uid}`);
+            })
+            .catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.error(errorMessage);
+            });
+    </script> -->
+    <div class="imgbox">
+        <img class="center-fit" src='1/adoptapet.jpeg'>
+    </div>
+    <div class="container">
+        <br>
+        <div class="left">
+            <form action="/newPost.html">
+                <img class="center-fit" src='1/2.jpeg'>
+                <p align="center">Click <button>POST</button> to post for an adoption.</p>
+            </form>
+        </div>
+        <div class="right">
+            <form action="/listPosts.html">
+                <img class="center-fit" src='1/3.jpeg'>
+                <p align="center">Click <button>REVIEW</button> to review all the post for adoption.</p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+    <a href="newPost.html"><button>New Post</button></a>
+    <a href="listPosts.html"><button>See All Posts</button></a>
+
+  </body>
+</html>

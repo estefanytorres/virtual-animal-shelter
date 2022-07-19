@@ -64,6 +64,52 @@ function createPostElement(post) {
     return postElement;
 }
 
+function validateLocation() {
+    // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
+    var geocoder = new google.maps.Geocoder();
+    var location = document.getElementById("location");
+    new google.maps.places.Autocomplete(location);
+    geocoder.geocode({
+        'address': location.value
+    }, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+            location.value = results[0].formatted_address;
+        } else {
+           alert("Invalid address");
+        }
+    });
+}
 
+//google.maps.event.addDomListener(window, 'load', validateLocation);
+//import {auth} from './index.js'; --> why doesn't this work?
 
+const firebaseApp = firebase.initializeApp({
+    apiKey: "AIzaSyAv-Zy1ZpAwC31yVhtcSgGIj3OmTUbkE5Y",
+    authDomain: "login-with-firebase-data-b3557.firebaseapp.com",
+    databaseURL: "https://login-with-firebase-data-b3557-default-rtdb.firebaseio.com",
+    projectId: "login-with-firebase-data-b3557",
+    storageBucket: "login-with-firebase-data-b3557.appspot.com",
+    messagingSenderId: "155976060237",
+    appId: "1:155976060237:web:7f8d2e6eab1f1895f93b04"
+}); //should change to team's firebase! currently juhee's own initializations.
 
+const db = firebaseApp.firestore();
+const auth = firebaseApp.auth();
+
+const signout = () => {
+    auth.signOut().then(() => {
+      alert("Signed Out Successfully!")
+    }).catch((error) => {
+      console.log(error.code)
+      console.log(error.message)
+      alert(error.message)
+    })
+}
+
+auth.onAuthStateChanged(function(user) {
+    if (!user) {
+        // User is signed out
+        // Redirect to Log In
+        window.location.replace("https://summer22-sps-24.appspot.com");
+    }
+});
