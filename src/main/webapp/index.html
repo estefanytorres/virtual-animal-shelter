@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Animal shelter</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
     <script src="script.js"></script>
-  </head>
+    <div class="row">
+    <img src="images/cat.png"> 
+    <a href="/newPost.html" class="button"> Add Post</a>
+    </div>
+  
   <body>
-    <div class="imgbox">
-        <img class="center-fit" src='1/adoptapet.jpeg'>
-    </div>
-    <div class = "title-style">
+    
         <h1>Animal Shelter</h1>
-    </div>
-    <div id="content">
-      <p>This is a platform for animal lover.</p>
-      <p>Click <a href="/hello">here</a> to post a request.</p>
-      <p>A home for animals.</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-
-    <a href="newPost.html"><button>New Post</button></a>
-    <a href="listPosts.html"><button>See All Posts</button></a>
+        <p style="font-size: 70px;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold; 
+        margin-left: 190px; ">A HOME FOR ANIMALS</p>
+    
+    <body onload = "loadPosts()">
+        <div class = "input">
+            <input type="search" id = "search" data-search placeholder="Search:Keywords of Location or Animal Type" style="margin-top: 80px;">
+        </div>
+        <div class="user-cards" data-user-cards-container>
+        </div>
+        
+        <template data-user-template>
+            <div class="card" >
+              <img src="1/default.jpeg" class="image" data-image width="150" height="150">
+              <div class="header" data-header>
+                  </div>
+              <div class ="location" data-location>
+                  </div>
+              <div class ="type" data-type>
+                  </div>
+              <div class ="age" data-age>
+                  </div>
+              <a href="#" class="btn btn-primary">More Information</a>  
+            </div>
+          </template>
+  
+    </body>
 
   </body>
 </html>
+

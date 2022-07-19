@@ -102,11 +102,13 @@ function loadPosts() {
             const location = card.querySelector("[data-location]")
             const type = card.querySelector("[data-type]")
             const age = card.querySelector("[data-age]")
+            const image = card.querySelector("[data-image]")
             header.textContent = post.petName;
             location.textContent = post.location;
             type.textContent = post.animalType;
             var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
             age.textContent = getAge(dob);
+            image.setAttribute('src', post.photoURL);
             userCardContainer.append(card);
             return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
       })
