@@ -18,26 +18,24 @@
     
     <body onload = "loadPosts()">
         <div class = "input">
-            <input type="search" id = "search" data-search placeholder="Search:Keywords of Location or Animal Type" style="margin-top:80px; ">
+            <input type="search" id = "search" data-search placeholder="Search:Keywords of Location or Animal Type" style="margin-top: 80px;">
         </div>
-        <div class="cards" data-user-cards-container>
+        <div class="user-cards" data-user-cards-container>
         </div>
         
-      <template data-user-template>
-        <div class="cards">
-          <div class="card">
-          <img src="1/cat-default.jpg" class="card-img" alt="...">
-          <div class="header" data-header>
-              </div>
-          <div class ="location" data-location>
-              </div>
-          <div class ="type" data-type>
-              </div>
-          <div class ="age" data-age>
-              </div>
+        <template data-user-template>
+            <div class="card" >
+              <img src="1/cat-default.jpg" class="card-img" alt="...">
+              <div class="header" data-header>
+                  </div>
+              <div class ="location" data-location>
+                  </div>
+              <div class ="type" data-type>
+                  </div>
+              <div class ="age" data-age>
+                  </div>
             </div>
-        </div>
-      </template>
+          </template>
   
     </body>
 
