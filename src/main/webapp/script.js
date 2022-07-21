@@ -56,6 +56,21 @@ function createPostElement(post) {
 }
 */
 
+function validateLocation() {
+    // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
+    var geocoder = new google.maps.Geocoder();
+    var location = document.getElementById("location");
+    new google.maps.places.Autocomplete(location);
+    geocoder.geocode({
+        'address': location.value
+    }, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+            location.value = results[0].formatted_address;
+        } else {
+           alert("Invalid address");
+        }
+    });
+}
 
 /** Caculate the age based on birthday. */
 function getAge(birthDate) 
