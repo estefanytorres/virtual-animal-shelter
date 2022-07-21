@@ -169,8 +169,12 @@ auth.onAuthStateChanged(function(user) {
         const displayEmail = user.email;
         var welcomeDiv = document.getElementById("welcome");
         welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
+        var newPost_btn = document.getElementById("newPost-btn");
+        newPost_btn.style.display = 'block';
     } else {
         var welcomeDiv = document.getElementById("welcome");
         welcomeDiv.innerHTML = "You're not logged in! Log in to create a new post.";
+        var newPost_btn = document.getElementById("newPost-btn");
+        newPost_btn.style.display = 'none';
     }
 });

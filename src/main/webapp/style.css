@@ -92,3 +92,7 @@ div.right {
     border-radius: 1em;
     padding: 1em;
 }
+
+#newPost-btn {
+    display: none;
+}
