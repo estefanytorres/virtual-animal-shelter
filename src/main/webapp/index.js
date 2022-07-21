@@ -70,13 +70,6 @@ auth.onAuthStateChanged(function(user) {
     if (user) {
       //user exists and is logged in
       //redirect Home
-      window.location.replace("https://summer22-sps-24.appspot.com/main.html");
+      window.location.replace("https://jhong-sps-summer22.appspot.com/main.html");
     }
-    // } else {
-    //   // User is signed out.
-    //   // redirect to login
-    // }
 });
-
-// need to implement sign out√ (and if time permits, also delete account functions)
-// also need to make sure we load to the correct html page once successfully signed in

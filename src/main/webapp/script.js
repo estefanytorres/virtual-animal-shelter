@@ -64,24 +64,53 @@ function createPostElement(post) {
     return postElement;
 }
 
+// for reference: 
+// new Promise((resolve, reject) => {
+
+//     throw new Error("Whoops!");
+  
+//   }).catch(function(error) {
+  
+//     alert("The error is handled, continue normally");
+  
+//   }).then(() => alert("Next successful handler runs"));
+
+// const validateLocation = new Promise((resolve, reject) => {
+//     throw new Error ("error!");
+// }).catch(function() {
+//     var geocoder = new google.maps.Geocoder();
+//     var location = document.getElementById("location");
+//     new google.maps.places.Autocomplete(location);
+//     geocoder.geocode({
+//         'address': location.value
+//     }, function(results, status) {
+//         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+//             location.value = results[0].formatted_address;
+//         } else {
+//            alert("Invalid address");
+//         }
+//     });
+// }.then(() => {
+//     console.log("success?");
+// })
+
 function validateLocation() {
     // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
-    var geocoder = new google.maps.Geocoder();
     var location = document.getElementById("location");
     new google.maps.places.Autocomplete(location);
-    geocoder.geocode({
-        'address': location.value
-    }, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-            location.value = results[0].formatted_address;
-        } else {
-           alert("Invalid address");
-        }
-    });
+    if (location.value) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': location.value
+        }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                location.value = results[0].formatted_address;
+            } else {
+               alert("Invalid address");
+            }
+        });
+    }
 }
-
-//google.maps.event.addDomListener(window, 'load', validateLocation);
-//import {auth} from './index.js'; --> why doesn't this work?
 
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyAv-Zy1ZpAwC31yVhtcSgGIj3OmTUbkE5Y",
@@ -110,6 +139,69 @@ auth.onAuthStateChanged(function(user) {
     if (!user) {
         // User is signed out
         // Redirect to Log In
-        window.location.replace("https://summer22-sps-24.appspot.com");
+        window.location.replace("https://jhong-sps-summer22.appspot.com");
     }
 });
+
+// const register = () => {
+//     const fullname = document.getElementById('fullname').value;
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
+//     console.log(email, password);
+//     auth.createUserWithEmailAndPassword(email, password)
+//     .then((res) => {
+//       console.log(res.user)
+//       db.collection('users')
+//         .add({
+//             fullname: fullname,
+//             email: email,
+//             password: password
+//         })
+//         .then((docRef) => {
+//             console.log("Document written with ID: ", docRef.id);
+//         })
+//         .catch((error) => {
+//             console.error("Error adding document: ", error);
+//       })
+//       alert("Registered Successfully!");
+//     })
+//     .catch((error) => {
+//       console.log(error.code)
+//       console.log(error.message)
+//       alert(error.message)
+//     })
+// }
+
+// const login = () => {
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
+  
+//     auth.signInWithEmailAndPassword(email, password)
+//     .then((res) => {
+//       console.log(res.user)
+//       alert("Logged In Successfully!")
+//     })
+//     .catch((error) => {
+//       console.log(error.code)
+//       console.log(error.message)
+//       alert(error.message)
+//     })
+// }
+
+// const signout = () => {
+//     auth.signOut().then(() => {
+//       alert("Signed Out Successfully!")
+//     }).catch((error) => {
+//       console.log(error.code)
+//       console.log(error.message)
+//       alert(error.message)
+//     })
+// }
+
+// auth.onAuthStateChanged(function(user) {
+//     if (user) {
+//       //user exists and is logged in
+//       //redirect Home
+//       window.location.replace("https://jhong-sps-summer22.appspot.com/main.html");
+//     }
+// });
