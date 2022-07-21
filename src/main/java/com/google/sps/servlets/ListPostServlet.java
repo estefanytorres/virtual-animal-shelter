@@ -28,7 +28,7 @@ public class ListPostServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
         Query<Entity> query =
-            Query.newEntityQueryBuilder().setKind("Post").setOrderBy(OrderBy.desc("time-posted")).build();
+            Query.newEntityQueryBuilder().setKind("Post").setOrderBy(OrderBy.desc("timePosted")).build();
         QueryResults<Entity> results = datastore.run(query);
     
         List<Post> posts = new ArrayList<>();
@@ -60,10 +60,10 @@ public class ListPostServlet extends HttpServlet {
             Post post = new Post(id, petName, location, animalType, breed, dob, gender, vaccination, sickness, email, phone, timePosted, photoURL);
             posts.add(post);
 
-            response.getWriter().println(photoURL);
-            response.getWriter().println(timePosted);
-            response.getWriter().println(phone);
-            response.getWriter().println(petName);
+            // response.getWriter().println(photoURL);
+            // response.getWriter().println(timePosted);
+            // response.getWriter().println(phone);
+            // response.getWriter().println(petName);
             // output the photoURL as an <img> element in HMTL
             // response.setContentType("text/html;");
             // String imgTag = String.format("<img src=\"%s\" />", photoURL);
