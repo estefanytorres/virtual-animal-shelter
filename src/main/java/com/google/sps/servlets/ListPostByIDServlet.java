@@ -7,7 +7,6 @@ import com.google.sps.data.Post.Status;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
 
-import com.google.appengine.api.datastore.Query;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.DatastoreOptions;
@@ -40,11 +39,12 @@ public class ListPostByIDServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String stringId = request.getParameter("id");
+        String stringName = request.getParameter("petName");
         Query<Entity> query =
         Query.newEntityQueryBuilder()
             .setKind("Post")
-            .setFilter(PropertyFilter.eq("breed", "c1"))
+            .setFilter(PropertyFilter.eq("petName", stringName))
+            //.setFilter(PropertyFilter.eq("petName", "cat1"))
             //.setFilter(PropertyFilter.gt("__key__", "5712837116690432")) tpye wrong
             //.setFilter(PropertyFilter.gt("__key__", keyFactory.newKey("5691975521009664")))
             //.setFilter(PropertyFilter.eq("id", "5691975521009664"))
@@ -86,8 +86,8 @@ public class ListPostByIDServlet extends HttpServlet {
         Gson gson = new Gson();
 
         response.setContentType("application/json;");
-        response.getWriter().println(keyFactory.newKey(stringId));
-        response.getWriter().println(keyFactory.newKey("5691975521009664"));
+        //response.getWriter().println(keyFactory.newKey(stringId));
+        //response.getWriter().println(keyFactory.newKey("5691975521009664"));
         //response.getWriter().println(stringId);
         //response.getWriter().println(String.valueOf(results.hasNext()));
         response.getWriter().println(gson.toJson(posts));

@@ -102,14 +102,14 @@ function loadPosts() {
             const type = card.querySelector("[data-type]")
             const age = card.querySelector("[data-age]")
             const image = card.querySelector("[data-image]")
+            const linkURL=card.querySelector("[data-link]")
             header.textContent = post.petName;
             location.textContent = post.location;
             type.textContent = post.animalType;
             var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
             age.textContent = getAge(dob);
             image.setAttribute('src', post.photoURL);
-
-            //details(post);
+            linkURL.setAttribute('href',"portfolio.html?petName="+post.petName)
 
             userCardContainer.append(card);
             return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
@@ -151,8 +151,8 @@ function GetURLParameter2() {
 }
 async function myfunction() 
 {
-    var myid = GetURLParameter("id");
-    const responseFromServer = await fetch("/load-by-id?id=" + myid);
+    var myName = GetURLParameter("petName");
+    const responseFromServer = await fetch("/load-by-id?petName=" + myName);
     //const responseFromServer = await fetch("/load-by-id?id=" + 5731076903272448);
     //const responseFromServer = await fetch('/load-by-id');
     const posts = await responseFromServer.json();
