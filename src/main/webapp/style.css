@@ -50,19 +50,3 @@ div.right {
     font-family:Fantasy;
     text-align:center;
 }
-
-#logout {
-    margin-top: 1px;
-    margin-right: 2px;
-    position:absolute;
-    top: 0;
-    right: 0;
-    background-color: black;
-    color: beige;   
-    font-family: Montserrat;
-    font-weight: 900;
-    font-size: 12px;
-    border-radius: 1em;
-    padding: 1em;
-    margin: 1em;
-}

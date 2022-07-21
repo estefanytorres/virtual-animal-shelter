@@ -97,7 +97,6 @@ public class NewPostServlet extends HttpServlet {
                 .set("email", email)
                 .set("phone", phone)
                 .set("timePosted", timePosted)
-                //.set("usr id" , firebase user id) // might have to pass it in from the frontend, 
                 //.set("status", status)
                 .set("photoURL", imageURL)
                 .build();
@@ -112,8 +111,8 @@ public class NewPostServlet extends HttpServlet {
     */
     private static String cloudStorageUpload(String fileName, InputStream fileInputStream) {
         //should edit once project id actually decided
-        String projectId = "jhong-sps-summer22";
-        String bucketName = "jhong-sps-summer22.appspot.com";
+        String projectId = "summer22-sps-24";
+        String bucketName = "summer22-sps-24.appspot.com";
 
         Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
