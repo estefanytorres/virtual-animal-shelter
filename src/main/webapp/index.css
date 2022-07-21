@@ -59,15 +59,14 @@ h1 {
 .card {
     box-sizing: border-box;
 }
-
-.card-image {
-    width: 100%;
+.image {
+    width: 150px;
     height: 150px;
     object-fit: cover;
     display: block;
-    border-top: 2px solid #333333;
-    border-right: 2px solid #333333;
-    border-left: 2px solid #333333;
+    border-top: 2px solid rgb(232, 23, 121);
+    border-right: 2px solid rgb(232, 23, 121);
+    border-left: 2px solid rgb(232, 23, 121);
 }
 
 .card > .header {
