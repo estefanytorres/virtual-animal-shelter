@@ -96,6 +96,51 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
+const register = () => {
+    // const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    console.log(email, password);
+    auth.createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      console.log(res.user)
+      db.collection('users')
+        .add({
+            // username: username,
+            email: email,
+            password: password
+        })
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+      })
+      alert("Registered Successfully!");
+    })
+    .catch((error) => {
+      console.log(error.code)
+      console.log(error.message)
+      alert(error.message)
+    })
+}
+
+const login = () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+  
+    auth.signInWithEmailAndPassword(email, password)
+    .then((res) => {
+      console.log(res.user)
+      alert("Logged In Successfully!")
+    })
+    .catch((error) => {
+      console.log(error.code)
+      console.log(error.message)
+      alert(error.message)
+    })
+}
+
 const signout = () => {
     auth.signOut().then(() => {
       alert("Signed Out Successfully!")
@@ -118,6 +163,9 @@ auth.onAuthStateChanged(function(user) {
         // console.log(docID);
         // const displayName = db.collection('users').doc(docID).username;
         // console.log(displayName);
+        if (window.location.href == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
+            window.location.replace("https://jhong-sps-summer22.appspot.com");
+        }
         const displayEmail = user.email;
         var welcomeDiv = document.getElementById("welcome");
         welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
