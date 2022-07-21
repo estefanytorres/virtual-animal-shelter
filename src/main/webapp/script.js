@@ -12,30 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-/** Fetches all sumbitted posts from the server and list them to the DOM. 
-function loadPosts() {
+
+/** Fetches all sumbitted posts from the server and list them to the DOM. */
+function myfunction2() {
     // "/load-post" is a servlet fetch all posts from the server;
     // Class Name for each post is Post
     // Each new Post named as post;
     // The List<Post> is named as posts;
+    var myid = GetURLParameter("id");
+    //const responseFromServer = await fetch("/load-by-id?id=" + myid);
     fetch("/load-post").then(response => response.json()).then((posts) => {
-        const postListElement = document.getElementById('post-container');
+        const postListElement = document.getElementById('name');
+        postListElement.innerText=myid;
         posts.forEach((post) => {
             postListElement.appendChild(createPostElement(post));
-
       })
     });
 }
-**/
 
-/** Creates an element that represents a post, including its delete button. 
+
+/** Creates an element that represents a post, including its delete button. */
 function createPostElement(post) {
     const postElement = document.createElement('li');
     postElement.className = 'post';
     
     const nameElement = document.createElement('strong');
-    nameElement.innerText = "Pet Name: " + post.petName;
+    nameElement.innerText = "Pet Name: " + post.petName +" ID:"+post.id;
 
     const typeElement = document.createElement('div');
     typeElement.innerText = "Animal Type: " + post.animalType;
@@ -43,18 +45,15 @@ function createPostElement(post) {
     const locElement = document.createElement('div');
     locElement.innerText = "Location: " + post.location;
 
-    const ageElement = document.createElement('div');
-    var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
-    ageElement.innerText = "Age: "+ getAge(dob);
 
     postElement.appendChild(nameElement);
     postElement.appendChild(typeElement);
     postElement.appendChild(locElement);
-    postElement.appendChild(ageElement);
+
 
     return postElement;
 }
-*/
+
 
 
 /** Caculate the age based on birthday. */
@@ -109,11 +108,76 @@ function loadPosts() {
             var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
             age.textContent = getAge(dob);
             image.setAttribute('src', post.photoURL);
+
+            //details(post);
+
             userCardContainer.append(card);
             return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
       })
     });
 }
+
+function details(post) {
+    const pName = document.getElementById('pName');
+    pName.innerText=post.petName;
+    const pEmail= document.getElementById('pEamil');
+    pEmail.innerText=post.email;
+}
+
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
+function GetURLParameter2() {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    document.getElementById('pName').innerHTML=sPageURL;
+    document.getElementById('pEmail').innerHTML=sURLVariables;
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        document.getElementById('name').innerHTML=sParameterName[0];
+        if (sParameterName[0] == "id") {
+            document.getElementById('name').innerHTML=sParameterName[1];
+            //return sParameterName[1];
+        }
+    }
+}
+async function myfunction() 
+{
+    var myid = GetURLParameter("id");
+    const responseFromServer = await fetch("/load-by-id?id=" + myid);
+    //const responseFromServer = await fetch("/load-by-id?id=" + 5731076903272448);
+    //const responseFromServer = await fetch('/load-by-id');
+    const posts = await responseFromServer.json();
+
+    const postListElement = document.getElementById('name');
+    posts.forEach((post) => {
+        postListElement.appendChild(createPostElement(post));    
+  })
+
+    document.getElementById('test1').innerText=responseFromServer;
+    document.getElementById('test2').innerText=posts;
+
+
+
+  /**
+    const responseFromServer = await fetch('/load-post');
+    const posts = await responseFromServer.json();
+    const Container = document.getElementById('name');
+    Container.innerText = posts;
+   */
+
+    
+}
+
+
 
 
 
