@@ -12,7 +12,7 @@ const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
 const register = () => {
-    const fullname = document.getElementById('fullname').value;
+    // const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     console.log(email, password);
@@ -21,7 +21,7 @@ const register = () => {
       console.log(res.user)
       db.collection('users')
         .add({
-            fullname: fullname,
+            // username: username,
             email: email,
             password: password
         })
@@ -70,12 +70,9 @@ auth.onAuthStateChanged(function(user) {
     if (user) {
       //user exists and is logged in
       //redirect Home
-      window.location.replace("https://summer22-sps-24.appspot.com/main.html");
-    }
-    // } else {
-    //   // User is signed out.
-    //   // redirect to login
-    // }
+      window.location.replace("https://jhong-sps-summer22.appspot.com");
+      // when redirected to homepage show username
+    } 
 });
 
 // need to implement sign out√ (and if time permits, also delete account functions)

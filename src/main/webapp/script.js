@@ -107,9 +107,22 @@ const signout = () => {
 }
 
 auth.onAuthStateChanged(function(user) {
-    if (!user) {
-        // User is signed out
-        // Redirect to Log In
-        window.location.replace("https://summer22-sps-24.appspot.com");
+    // if (!user) {
+    //     // User is signed out
+    //     // Redirect to Log In
+    //     //window.location.replace("https://jhong-sps-summer22.appspot.com");
+    //     //alert (not actual alert user though) that the user has been signed out, stop showing their username
+    // }
+    if (user) {
+        // docID = db.collection('users').doc(user.uid).collection('users').doc();
+        // console.log(docID);
+        // const displayName = db.collection('users').doc(docID).username;
+        // console.log(displayName);
+        const displayEmail = user.email;
+        var welcomeDiv = document.getElementById("welcome");
+        welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
+    } else {
+        var welcomeDiv = document.getElementById("welcome");
+        welcomeDiv.innerHTML = "You're not logged in! Log in to create a new post.";
     }
 });

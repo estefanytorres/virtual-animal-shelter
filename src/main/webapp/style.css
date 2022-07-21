@@ -8,7 +8,18 @@
   margin-top: 20px;
 } */
 
+div {
+    display: block;
+}
 
+.container1 {
+    width: 100%;
+    height: 50px;
+}
+
+#welcome {
+    display: block;
+}
   
 .container {
     width: 100%;
@@ -53,8 +64,8 @@ div.right {
 }
 
 #logout {
-    margin-top: 1px;
-    margin-right: 2px;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
     position:absolute;
     top: 0;
     right: 0;
@@ -65,5 +76,19 @@ div.right {
     font-size: 12px;
     border-radius: 1em;
     padding: 1em;
-    margin: 1em;
+}
+
+#signup_signin {
+    margin-top: 0.5em;
+    margin-right: 8em;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
 }
