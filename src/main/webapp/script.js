@@ -11,18 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-    const greetings =
-        ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-    // Pick a random greeting.
-    const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-    // Add it to the page.
-    const greetingContainer = document.getElementById('greeting-container');
-    greetingContainer.innerText = greeting;
-  }
 
   function validateLocation() {
       // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
@@ -183,17 +171,67 @@ function loadPosts() {
             const type = card.querySelector("[data-type]")
             const age = card.querySelector("[data-age]")
             const image = card.querySelector("[data-image]")
+            const linkURL=card.querySelector("[data-link]")
             header.textContent = post.petName;
             location.textContent = post.location;
             type.textContent = post.animalType;
             var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
             age.textContent = getAge(dob);
             image.setAttribute('src', post.photoURL);
+            linkURL.setAttribute('href',"portfolio.html?id="+post.id)
+
             userCardContainer.append(card);
             return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
       })
     });
 }
+
+/** Get the URL parameter from the location interface . **/
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
+/** Call load-by-id servelt and present the information of this id . **/
+async function getPortfolio() 
+{
+    var myId = GetURLParameter("id");
+    const responseFromServer = await fetch("/load-by-id?id=" + myId);
+    const post = await responseFromServer.json();
+
+    const name = document.querySelector("[pName]")
+    const email = document.querySelector("[pEmail]")
+    const gender = document.querySelector("[pGender]")
+    const age = document.querySelector("[pAge]")
+    const phone = document.querySelector("[pPhone]")
+    const image = document.querySelector("[pImage]")
+    const location = document.querySelector("[pLocation]")
+    const animalType = document.querySelector("[pAnimalType]")
+    const breed = document.querySelector("[pBreed]")
+    const vaccination = document.querySelector("[pVaccination]")
+    const sickness = document.querySelector("[pSickness]")
+    
+    name.textContent = post.petName;
+    email.textContent = post.email;
+    gender.textContent = post.gender;
+    var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+    age.textContent = getAge(dob);
+    phone.textContent = post.phone;
+    image.setAttribute('src', post.photoURL);
+    location.textContent = post.location;
+    animalType.textContent = post.animalType;
+    breed.textContent = post.breed;
+    vaccination.textContent = post.vaccination;
+    sickness.textContent = post.sickness; 
+}
+
+
 
 
 
