@@ -12,50 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/** Fetches all sumbitted posts from the server and list them to the DOM. */
-function myfunction2() {
-    // "/load-post" is a servlet fetch all posts from the server;
-    // Class Name for each post is Post
-    // Each new Post named as post;
-    // The List<Post> is named as posts;
-    var myid = GetURLParameter("id");
-    //const responseFromServer = await fetch("/load-by-id?id=" + myid);
-    fetch("/load-post").then(response => response.json()).then((posts) => {
-        const postListElement = document.getElementById('name');
-        postListElement.innerText=myid;
-        posts.forEach((post) => {
-            postListElement.appendChild(createPostElement(post));
-      })
-    });
-}
-
-
-/** Creates an element that represents a post, including its delete button. */
-function createPostElement(post) {
-    const postElement = document.createElement('li');
-    postElement.className = 'post';
-    
-    const nameElement = document.createElement('strong');
-    nameElement.innerText = "Pet Name: " + post.petName +" ID:"+post.id;
-
-    const typeElement = document.createElement('div');
-    typeElement.innerText = "Animal Type: " + post.animalType;
-
-    const locElement = document.createElement('div');
-    locElement.innerText = "Location: " + post.location;
-
-
-    postElement.appendChild(nameElement);
-    postElement.appendChild(typeElement);
-    postElement.appendChild(locElement);
-
-
-    return postElement;
-}
-
-
-
 /** Caculate the age based on birthday. */
 function getAge(birthDate) 
 {
@@ -109,7 +65,7 @@ function loadPosts() {
             var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
             age.textContent = getAge(dob);
             image.setAttribute('src', post.photoURL);
-            linkURL.setAttribute('href',"portfolio.html?petName="+post.petName)
+            linkURL.setAttribute('href',"portfolio.html?id="+post.id)
 
             userCardContainer.append(card);
             return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
@@ -117,13 +73,7 @@ function loadPosts() {
     });
 }
 
-function details(post) {
-    const pName = document.getElementById('pName');
-    pName.innerText=post.petName;
-    const pEmail= document.getElementById('pEamil');
-    pEmail.innerText=post.email;
-}
-
+/** Get the URL parameter from the location interface . **/
 function GetURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -135,46 +85,37 @@ function GetURLParameter(sParam) {
     }
 }
 
-function GetURLParameter2() {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    document.getElementById('pName').innerHTML=sPageURL;
-    document.getElementById('pEmail').innerHTML=sURLVariables;
-    for (var i = 0; i < sURLVariables.length; i++) {
-        var sParameterName = sURLVariables[i].split('=');
-        document.getElementById('name').innerHTML=sParameterName[0];
-        if (sParameterName[0] == "id") {
-            document.getElementById('name').innerHTML=sParameterName[1];
-            //return sParameterName[1];
-        }
-    }
-}
-async function myfunction() 
+/** Call load-by-id servelt and present the information of this id . **/
+async function getPortfolio() 
 {
-    var myName = GetURLParameter("petName");
-    const responseFromServer = await fetch("/load-by-id?petName=" + myName);
-    //const responseFromServer = await fetch("/load-by-id?id=" + 5731076903272448);
-    //const responseFromServer = await fetch('/load-by-id');
-    const posts = await responseFromServer.json();
+    var myId = GetURLParameter("id");
+    const responseFromServer = await fetch("/load-by-id?id=" + myId);
+    const post = await responseFromServer.json();
 
-    const postListElement = document.getElementById('name');
-    posts.forEach((post) => {
-        postListElement.appendChild(createPostElement(post));    
-  })
-
-    document.getElementById('test1').innerText=responseFromServer;
-    document.getElementById('test2').innerText=posts;
-
-
-
-  /**
-    const responseFromServer = await fetch('/load-post');
-    const posts = await responseFromServer.json();
-    const Container = document.getElementById('name');
-    Container.innerText = posts;
-   */
-
+    const name = document.querySelector("[pName]")
+    const email = document.querySelector("[pEmail]")
+    const gender = document.querySelector("[pGender]")
+    const age = document.querySelector("[pAge]")
+    const phone = document.querySelector("[pPhone]")
+    const image = document.querySelector("[pImage]")
+    const location = document.querySelector("[pLocation]")
+    const animalType = document.querySelector("[pAnimalType]")
+    const breed = document.querySelector("[pBreed]")
+    const vaccination = document.querySelector("[pVaccination]")
+    const sickness = document.querySelector("[pSickness]")
     
+    name.textContent = post.petName;
+    email.textContent = post.email;
+    gender.textContent = post.gender;
+    var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+    age.textContent = getAge(dob);
+    phone.textContent = post.phone;
+    image.setAttribute('src', post.photoURL);
+    location.textContent = post.location;
+    animalType.textContent = post.animalType;
+    breed.textContent = post.breed;
+    vaccination.textContent = post.vaccination;
+    sickness.textContent = post.sickness; 
 }
 
 
