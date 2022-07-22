@@ -101,8 +101,8 @@ public class NewPostServlet extends HttpServlet {
                 .set("photoURL", imageURL)
                 .build();
         datastore.put(postEntity);
-
-        response.getWriter().println("Posted and Stored Successfully!");
+        response.sendRedirect("/index.html");
+        
     }
 
     /*

@@ -1,0 +1,19 @@
+input {
+    width:200px;
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius:10px;
+    font-size: 18px;  
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+    body {
+      font-size: 18px; 
+      color: black; 
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+      margin-left: 450px;
+      background-image: url(images/dog.jpg), url(images/cat.jpg);
+    background-position: right bottom, left top;
+      background-repeat: no-repeat, no-repeat;
+    }

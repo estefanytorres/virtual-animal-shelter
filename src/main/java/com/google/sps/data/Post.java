@@ -11,7 +11,8 @@ public class Post {
 
     public enum Gender {
         MALE,
-        FEMALE
+        FEMALE,
+        UNSPECIFIED
     }
     
     public enum Status {

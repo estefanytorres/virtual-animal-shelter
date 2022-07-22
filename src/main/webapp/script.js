@@ -23,41 +23,7 @@ function addRandomGreeting() {
     const greetingContainer = document.getElementById('greeting-container');
     greetingContainer.innerText = greeting;
   }
-  /** Fetches all sumbitted posts from the server and list them to the DOM. **/
-  function loadPosts() {
-      // "/list-posts" is a servlet fetch all posts from the server;
-      // Class Name for each post is Post
-      // Each new Post named as post;
-      // The List<Post> is named as posts;
-      fetch('/load-post').then(response => response.json()).then((posts) => {
-      const postListElement = document.getElementById('post-container');
-      posts.forEach((post) => {
-          console.log(post);
-          postListElement.appendChild(createPostElement(post));
-        })
-      });
-  }
-  /** Creates an element that represents a post, including its delete button. */
-  function createPostElement(post) {
-      const postElement = document.createElement('li');
-      postElement.className = 'post';
-      
-      const titleElement = document.createElement('span');
-      titleElement.innerText = post.textValue;
-      
-      // create a button to delete an elemnet
-      const deleteButtonElement = document.createElement('button');
-      deleteButtonElement.innerText = 'Delete';
-      deleteButtonElement.addEventListener('click', () => {
-          delete post;
-      // Remove an element from the DOM.
-      postElement.remove();
-      });
-      
-      postElement.appendChild(titleElement);
-      postElement.appendChild(deleteButtonElement);
-      return postElement;
-  }
+
   function validateLocation() {
       // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
       var geocoder = new google.maps.Geocoder();
@@ -146,32 +112,90 @@ function addRandomGreeting() {
       //     //alert (not actual alert user though) that the user has been signed out, stop showing their username
       // }
       if (user) {
-          // docID = db.collection('users').doc(user.uid).collection('users').doc();
-          // console.log(docID);
-          // const displayName = db.collection('users').doc(docID).username;
-          // console.log(displayName);
-        //   if (window.location.href == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
-        //         window.location = "https://jhong-sps-summer22.appspot.com";
-        //         const displayEmail = user.email;
-        //         var welcomeDiv = document.getElementById("welcome");
-        //         welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
-        //         var newPost_btn = document.getElementById("newPost-btn");
-        //         newPost_btn.style.display = 'block';
-        //   }
-            if (window.location == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
-                window.location = "https://jhong-sps-summer22.appspot.com";
+            // if (window.location == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
+            //     window.location = "https://jhong-sps-summer22.appspot.com";
+            // }
+            if (window.location != "https://jhong-sps-summer22.appspot.com/") {
+                window.location = "https://jhong-sps-summer22.appspot.com/";
             }
             const displayEmail = user.email;
             var welcomeDiv = document.getElementById("welcome");
             welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
-            var newPost_btn = document.getElementById("newPost-btn");
+            var newPost_btn = document.getElementById("newPost_btn");
             newPost_btn.style.display = 'block';
-          //if (window.location.href == "https://jhong-sps-summer22.appspot.com") {
-          //}
       } else {
             var welcomeDiv = document.getElementById("welcome");
             welcomeDiv.innerHTML = "You're not logged in! Log in to create a new post.";
-            var newPost_btn = document.getElementById("newPost-btn");
+            var newPost_btn = document.getElementById("newPost_btn");
             newPost_btn.style.display = 'none';
       }
   }); 
+
+/*
+
+
+/** Caculate the age based on birthday. */
+function getAge(birthDate) 
+{
+    let result;
+    var today = new Date(); //returns date object of current date and time
+    var y_diff = today.getFullYear() - birthDate.getFullYear();
+    var m_diff = today.getMonth() - birthDate.getMonth();
+
+    if (m_diff < 0) 
+    {
+        y_diff--;
+        m_diff = 12 + m_diff;
+    }
+
+    if (y_diff < 0) {
+        result = "Unborn Baby"
+    } else {
+        result = y_diff.toString() + " years " + m_diff.toString() + " months old";
+    }
+
+    return result;
+}
+
+/** Fetches all sumbitted posts from the server with search function based animalType and location. **/
+function loadPosts() {
+    const userCardTemplate = document.querySelector("[data-user-template]");
+    const userCardContainer = document.querySelector("[data-user-cards-container]");
+    const searchInput = document.querySelector("[data-search]");
+
+    let lists = [];
+
+    searchInput.addEventListener("input", (e)=> {
+        const value = e.target.value.toLowerCase();
+        lists.forEach(post => {
+            const isVisible = post.animalType.toLowerCase().includes(value) || post.location.toLowerCase().includes(value)
+            post.element.classList.toggle("hide", !isVisible)
+        })
+    })
+    fetch("/load-post").then(response => response.json()).then(posts => {
+        lists = posts.map(post => {
+            const card = userCardTemplate.content.cloneNode(true).children[0];
+            const header = card.querySelector("[data-header]")
+            const location = card.querySelector("[data-location]")
+            const type = card.querySelector("[data-type]")
+            const age = card.querySelector("[data-age]")
+            const image = card.querySelector("[data-image]")
+            header.textContent = post.petName;
+            location.textContent = post.location;
+            type.textContent = post.animalType;
+            var dob = new Date(post.dob.year, post.dob.month, post.dob.day);
+            age.textContent = getAge(dob);
+            image.setAttribute('src', post.photoURL);
+            userCardContainer.append(card);
+            return {name: post.petName, location: post.location, animalType: post.animalType, age:age.textContent, element:card}
+      })
+    });
+}
+
+
+
+
+
+
+
+
