@@ -26,18 +26,21 @@ function addRandomGreeting() {
 
   function validateLocation() {
       // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
-      var geocoder = new google.maps.Geocoder();
       var location = document.getElementById("location");
       new google.maps.places.Autocomplete(location);
-      geocoder.geocode({
-          'address': location.value
-      }, function(results, status) {
-          if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-              location.value = results[0].formatted_address;
-          } else {
-             alert("Invalid address");
-          }
-      });
+      new google.maps.places.Autocomplete(location);
+      if (location.value) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': location.value
+        }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                location.value = results[0].formatted_address;
+            } else {
+               alert("Invalid address");
+            }
+        });
+      }
   }
   //google.maps.event.addDomListener(window, 'load', validateLocation);
   //import {auth} from './index.js'; --> why doesn't this work?
@@ -115,8 +118,8 @@ function addRandomGreeting() {
             // if (window.location == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
             //     window.location = "https://jhong-sps-summer22.appspot.com";
             // }
-            if (window.location != "https://jhong-sps-summer22.appspot.com/") {
-                window.location = "https://jhong-sps-summer22.appspot.com/";
+            if (window.location != "https://summer22-sps-24.appspot.com/") {
+                window.location = "https://summer22-sps-24.appspot.com/";
             }
             const displayEmail = user.email;
             var welcomeDiv = document.getElementById("welcome");

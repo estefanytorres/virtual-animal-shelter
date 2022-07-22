@@ -2,8 +2,8 @@
 <html>
 <link rel="stylesheet" href="newPost.css">
 <body>
-<script src="//maps.googleapis.com/maps/api/js"></script> geocoder
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk&libraries=places&callback=validateLocation"></script> <!-- google maps autocomplete -->
+<!-- <script src="//maps.googleapis.com/maps/api/js"></script> geocoder
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk&libraries=places&callback=validateLocation"></script>  -->
 <!-- Our google maps platform api key: AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk-->
 <h1>Pet's Information</h1>
 
@@ -12,7 +12,7 @@
   <label for="petName">Pet name:</label>
   <input type="text" id="petName" name="petName"><br><br>
   <label for="location">Address:</label>
-  <input type="text" id="location" name="location" onchange="validateLocation()" placeholder="address need not be precise"><br><br>
+  <input type="text" id="location" name="location" onchange="validateLocation()" placeholder="address or location"><br><br>
   <label for="animalType">Animal Type:</label>
   <input type="text" id="animalType" name="animalType"><br><br>
   <label for="breed">Breed:</label>
@@ -38,5 +38,7 @@
           accept=".jpg, .jpeg, .png"><br><br> 
   <input type="submit" style="background-color: pink;"> 
 </form>
+<script src="script.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn7siY7G02tF8TyKIvLBbs34Gwe8sdPKk&libraries=places&callback=validateLocation"></script> 
 </body>
 </html>
