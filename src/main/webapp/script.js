@@ -12,6 +12,119 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+  function validateLocation() {
+      // you can refer to geocoder here: https://developers.google.com/maps/documentation/javascript/geocoding
+      var location = document.getElementById("location");
+      new google.maps.places.Autocomplete(location);
+      new google.maps.places.Autocomplete(location);
+      if (location.value) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': location.value
+        }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                location.value = results[0].formatted_address;
+            } else {
+               alert("Invalid address");
+            }
+        });
+      }
+  }
+  //google.maps.event.addDomListener(window, 'load', validateLocation);
+  //import {auth} from './index.js'; --> why doesn't this work?
+  const firebaseApp = firebase.initializeApp({
+      apiKey: "AIzaSyAv-Zy1ZpAwC31yVhtcSgGIj3OmTUbkE5Y",
+      authDomain: "login-with-firebase-data-b3557.firebaseapp.com",
+      databaseURL: "https://login-with-firebase-data-b3557-default-rtdb.firebaseio.com",
+      projectId: "login-with-firebase-data-b3557",
+      storageBucket: "login-with-firebase-data-b3557.appspot.com",
+      messagingSenderId: "155976060237",
+      appId: "1:155976060237:web:7f8d2e6eab1f1895f93b04"
+  }); //should change to team's firebase! currently juhee's own initializations.
+  const db = firebaseApp.firestore();
+  const auth = firebaseApp.auth();
+  const register = () => {
+      // const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      console.log(email, password);
+      auth.createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log(res.user)
+        db.collection('users')
+          .add({
+              // username: username,
+              email: email,
+              password: password
+          })
+          .then((docRef) => {
+              console.log("Document written with ID: ", docRef.id);
+          })
+          .catch((error) => {
+              console.error("Error adding document: ", error);
+        })
+        alert("Registered Successfully!");
+      })
+      .catch((error) => {
+        console.log(error.code)
+        console.log(error.message)
+        alert(error.message)
+      })
+  }
+  const login = () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+    
+      auth.signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log(res.user)
+        alert("Logged In Successfully!")
+      })
+      .catch((error) => {
+        console.log(error.code)
+        console.log(error.message)
+        alert(error.message)
+      })
+  }
+  const signout = () => {
+      auth.signOut().then(() => {
+        alert("Signed Out Successfully!")
+      }).catch((error) => {
+        console.log(error.code)
+        console.log(error.message)
+        alert(error.message)
+      })
+  }
+  auth.onAuthStateChanged(function(user) {
+      // if (!user) {
+      //     // User is signed out
+      //     // Redirect to Log In
+      //     //window.location.replace("https://jhong-sps-summer22.appspot.com");
+      //     //alert (not actual alert user though) that the user has been signed out, stop showing their username
+      // }
+      if (user) {
+            // if (window.location == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
+            //     window.location = "https://jhong-sps-summer22.appspot.com";
+            // }
+            if (window.location != "https://summer22-sps-24.appspot.com/") {
+                window.location = "https://summer22-sps-24.appspot.com/";
+            }
+            const displayEmail = user.email;
+            var welcomeDiv = document.getElementById("welcome");
+            welcomeDiv.innerHTML = "You're logged in with " + displayEmail + ". Welcome!";
+            var newPost_btn = document.getElementById("newPost_btn");
+            newPost_btn.style.display = 'block';
+      } else {
+            var welcomeDiv = document.getElementById("welcome");
+            welcomeDiv.innerHTML = "You're not logged in! Log in to create a new post.";
+            var newPost_btn = document.getElementById("newPost_btn");
+            newPost_btn.style.display = 'none';
+      }
+  }); 
+
+/*
+
+
 /** Caculate the age based on birthday. */
 function getAge(birthDate) 
 {
