@@ -1,0 +1,238 @@
+div {
+    display: block;
+}
+
+.container1 {
+    width: 100%;
+    height: 50px;
+}
+
+#welcome {
+    display: block;
+}
+  
+.container {
+    width: 100%;
+    line-height: 0px;
+}
+  
+.container div {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    line-height: 20px;
+    height: 100%;
+}
+  
+div.left {
+    outline: 2px solid pink;
+    height: 100%;
+    width: 40%;
+    float:left;
+    margin: 5%;
+  }
+  
+div.right {
+    outline: 2px solid orange;
+    height: 100%;
+    width: 40%;
+    float:right;
+    margin: 5%;
+}
+
+.imgbox {
+    display: grid;
+    height: 100%;
+}
+.center-fit {
+    max-width: 100%;
+    margin: auto;
+}
+.title-style{
+    font-family:Fantasy;
+    text-align:center;
+}
+
+#logout {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+#signup_signin {
+    margin-top: 0.5em;
+    margin-right: 8em;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-image: url("https://www.ebsco.com/sites/g/files/nabnos191/files/acquiadam-assets/librarian-pet-ownership-results-blog-image-780.jpg");
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logout {
+    margin-top: 1px;
+    margin-right: 2px;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+#content_container {
+    width: 30%;
+    height: 55%;
+}
+
+#form_container {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgb(38, 79, 44);
+    box-shadow: 0 0 50px -20px #000;
+    border-radius: 1em;
+
+    overflow: hidden;
+}
+
+#form_header_container {
+    width: 100%;
+    height: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    padding: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
+    border-bottom: 1px solid transparent;
+    border-image: gray;
+    background: #000;
+}
+
+#form_header {
+    display: inline-block;
+    font-size: 15px;
+    font-family: Bowlby One SC;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+
+    background: beige;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+}
+
+#form_content_container {
+    width: 100%;
+    height: 90%;
+
+    float: left;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 30px;
+}
+
+#form_content_inner_container {
+    width: 75%;
+    height: 100%;
+
+    float: left;
+
+}
+
+.login_input { 
+    width: 100%;
+    height: 40px;
+
+    padding-left: 10px;
+    margin-bottom: 20px;
+
+    background: #000;
+    font-family: Montserrat;
+    font-weight: 500;
+    color: #fff;
+    font-size: 12px;
+
+    border-bottom: 2px solid transparent;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-image: -webkit-linear-gradient(25deg, #FFBE0B, #3A86FF) 1;
+}
+
+#button_container {
+    width: 100%;
+    height: 10%;
+
+    background-image: linear-gradient(80deg, #FB5607, #FFBE0B 50%, #3A86FF 50%, #8338EC);
+    color: beige;
+
+    float: left;
+
+    margin-top: 5px;
+}
+
+#button_container button {
+    width: 50%;
+    height: 100%;
+    float: left;
+
+    background: transparent;
+    color: inherit;
+
+    font-family: Montserrat;
+    letter-spacing: 1px;
+    font-weight: 900;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    position: static;
+    display: inline;
+    margin: 0px;
+
+} 

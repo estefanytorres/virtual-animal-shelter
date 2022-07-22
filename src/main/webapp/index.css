@@ -1,3 +1,47 @@
+#logout {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(232, 23, 121);
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+#welcome {
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    display: block;
+    color: rgb(232, 23, 121);
+}
+
+#newPost_btn {
+    display: none;
+    background-color: transparent;
+    border-color: rgb(232, 23, 121);
+    border-radius: 1em;
+}
+
+#signup_signin {
+    margin-top: 0.5em;
+    margin-right: 8em;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(232, 23, 121);
+    color: beige;   
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 12px;
+    border-radius: 1em;
+    padding: 1em;
+}
 
 a {
     color: rgb(232, 23, 121);

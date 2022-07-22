@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Animal shelter</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="index.css">
-    <script src="script.js"></script>
-<div class="container1">    
-    <img src="images/cat.png" style = "display:inline-block;"> 
-    <div style="display:inline-block;margin-left:40%">
-    <a href="/newPost.html"> Add Post</a></div>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet"> 
+
+  </head>
+  <body>
+    <div class="container1">
+        <button id="signup_signin" onclick="location.href='sign_in_sign_up.html';">Log In / Register</button>
+        <button id="logout" onclick="signout()">Log Out</button>
+        <div id="welcome"></div>
+        <img src="images/cat.png" style = "display:inline-block;"> 
+        <div style="display:inline-block;margin-left:40%">
+        <button id="newPost_btn"> <a href="/newPost.html"> Add Post </a></div> </button>
+    </div>
     </div>
     <div class="container" style="margin-top:15px;">
         <h1>Animal Shelter</h1>
@@ -35,12 +52,13 @@
               <div class ="age" data-age>
                   </div>
               <a href="#" class="btn btn-primary" style="font-size: 15px;">More Information</a>  
-
             </div>
-          </template>
-  
-    
+        </template>
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
 
