@@ -115,8 +115,8 @@ function addRandomGreeting() {
             // if (window.location == "https://jhong-sps-summer22.appspot.com/sign_in_sign_up.html") {
             //     window.location = "https://jhong-sps-summer22.appspot.com";
             // }
-            if (window.location != "https://jhong-sps-summer22.appspot.com/") {
-                window.location = "https://jhong-sps-summer22.appspot.com/";
+            if (window.location != "https://summer22-sps-24.appspot.com") {
+                window.location = "https://summer22-sps-24.appspot.com/";
             }
             const displayEmail = user.email;
             var welcomeDiv = document.getElementById("welcome");
